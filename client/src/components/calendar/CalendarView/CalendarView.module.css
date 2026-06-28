@@ -1,0 +1,68 @@
+.wrapper {
+  background: var(--color-surface);
+
+  padding: 24px;
+
+  border-radius: 18px;
+
+  border: 1px solid var(--color-border);
+
+  box-shadow: var(--shadow-sm);
+}
+
+/* Toolbar */
+
+:global(.rbc-toolbar) {
+  margin-bottom: 24px;
+}
+
+:global(.rbc-toolbar button) {
+  border-radius: 10px;
+
+  border: 1px solid var(--color-border);
+
+  background: white;
+
+  padding: 8px 14px;
+}
+
+:global(.rbc-toolbar button:hover) {
+  background: rgba(79, 70, 229, 0.08);
+}
+
+:global(.rbc-active) {
+  background: var(--color-primary) !important;
+
+  color: white !important;
+}
+
+/* Calendar cells */
+
+:global(.rbc-month-view) {
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+:global(.rbc-today) {
+  background: rgba(79, 70, 229, 0.08);
+}
+
+:global(.rbc-event) {
+  border-radius: 8px;
+
+  background: var(--color-primary);
+
+  border: none;
+}
+.loading {
+  display: grid;
+
+  place-items: center;
+
+  height: 700px;
+
+  background: var(--color-surface);
+
+  border-radius: 18px;
+}

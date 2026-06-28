@@ -1,0 +1,281 @@
+/* ==========================================================================
+   Topbar
+   ========================================================================== */
+
+.topbar {
+  height: var(--topbar-height);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 var(--space-6);
+
+  background: var(--color-surface);
+
+  border-bottom: 1px solid var(--color-border);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 100;
+}
+
+/* ==========================================================================
+   Icon Buttons
+   ========================================================================== */
+
+.iconButton {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+
+  color: var(--color-text-primary);
+
+  cursor: pointer;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.iconButton:hover {
+  background: var(--color-hover);
+}
+
+.iconButton:active {
+  transform: scale(0.95);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   Right Side
+   ========================================================================== */
+
+.right {
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-4);
+}
+
+/* ==========================================================================
+   Profile
+   ========================================================================== */
+
+.profile {
+  position: relative;
+}
+
+.profileButton {
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-2);
+
+  padding: 4px;
+
+  border: none;
+  border-radius: var(--radius-md);
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: background-color var(--transition-fast);
+}
+
+.profileButton:hover {
+  background: var(--color-hover);
+}
+
+/* ==========================================================================
+   Avatar
+   ========================================================================== */
+
+.avatar {
+  width: 40px;
+  height: 40px;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+}
+
+.avatarFallback {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Dropdown Menu
+   ========================================================================== */
+
+.menu {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  width: 260px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-md);
+
+  overflow: hidden;
+
+  animation: menuFade 0.18s ease;
+
+  z-index: 200;
+}
+
+/* ==========================================================================
+   User Information
+   ========================================================================== */
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: var(--space-5);
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.userInfo strong {
+  color: var(--color-text-primary);
+
+  font-size: 0.95rem;
+}
+
+.userInfo span {
+  color: var(--color-text-secondary);
+
+  font-size: 0.85rem;
+
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   Menu Items
+   ========================================================================== */
+
+.menuItem {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: var(--space-3);
+
+  padding: 14px 20px;
+
+  border: none;
+
+  background: transparent;
+
+  color: var(--color-text-primary);
+
+  cursor: pointer;
+
+  font-size: 0.95rem;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.menuItem:hover {
+  background: var(--color-hover);
+}
+
+.menuItem:last-child:hover {
+  color: var(--color-danger);
+}
+
+/* ==========================================================================
+   Animation
+   ========================================================================== */
+
+@keyframes menuFade {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 var(--space-4);
+  }
+
+  .menu {
+    width: 220px;
+  }
+
+  .avatar,
+  .avatarFallback {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.rotate {
+  transform: rotate(180deg);
+
+  transition: transform var(--transition-fast);
+}
+
+.profileButton svg {
+  transition: transform var(--transition-fast);
+}
+
+.divider {
+  margin: 0;
+
+  border: none;
+
+  border-top: 1px solid var(--color-border);
+}

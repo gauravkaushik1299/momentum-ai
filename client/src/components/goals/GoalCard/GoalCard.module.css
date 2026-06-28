@@ -1,0 +1,169 @@
+.card {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+
+  padding: 24px;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 16px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(79, 70, 229, 0.25);
+
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 20px;
+}
+
+.header h3 {
+  margin: 0 0 8px;
+
+  font-size: 1.1rem;
+
+  color: var(--color-text-primary);
+}
+
+.header p {
+  margin: 0;
+
+  color: var(--color-text-secondary);
+
+  line-height: 1.6;
+}
+
+.icon {
+  color: var(--color-primary);
+}
+
+.progressSection {
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 0.95rem;
+}
+
+.progressBar {
+  width: 100%;
+
+  height: 10px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #ececf4;
+}
+
+.progressFill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+
+  transition: width 0.3s ease;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-top: 16px;
+
+  border-top: 1px solid var(--color-border);
+}
+
+.meta {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  color: var(--color-text-secondary);
+
+  font-size: 0.9rem;
+}
+
+.meta span {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+.actions {
+  display: flex;
+
+  gap: 8px;
+}
+
+.actions button {
+  width: 38px;
+
+  height: 38px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: var(--color-text-secondary);
+
+  transition: 0.2s;
+}
+
+.actions button:hover {
+  background: #eef2ff;
+
+  color: var(--color-primary);
+}
+
+.actions button:last-child:hover {
+  background: rgba(220, 38, 38, 0.08);
+
+  color: var(--color-danger);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 16px;
+  }
+}

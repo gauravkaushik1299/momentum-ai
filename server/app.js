@@ -1,35 +1,47 @@
 /**
- * app.js
- *
+ * ============================================================================
+ * File: app.js
+ * Path: server/app.js
+ * ----------------------------------------------------------------------------
  * Creates and configures the Express application.
- * The server entry point (server.js) imports this file.
+ * ============================================================================
  */
 
 const express = require("express");
 const cors = require("cors");
 
+const healthRoutes = require("./routes/healthRoutes");
+
 const app = express();
 
 /**
- * Enable Cross-Origin Resource Sharing.
- * This allows the React frontend to communicate
- * with the backend during development.
+ * --------------------------------------------------------------------------
+ * Middleware
+ * --------------------------------------------------------------------------
  */
+
 app.use(cors());
 
-/**
- * Parse incoming JSON request bodies.
- */
 app.use(express.json());
 
 /**
- * Health check route.
- * Useful to verify that the backend is running.
+ * --------------------------------------------------------------------------
+ * API Routes
+ * --------------------------------------------------------------------------
  */
-app.get("/", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Momentum AI Backend is running 🚀",
+
+app.use("/api/health", healthRoutes);
+
+/**
+ * --------------------------------------------------------------------------
+ * Handle Unknown Routes
+ * --------------------------------------------------------------------------
+ */
+
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: "Route not found.",
   });
 });
 

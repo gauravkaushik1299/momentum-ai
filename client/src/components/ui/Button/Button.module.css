@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Base Button
+   ========================================================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: var(--space-2);
+
+  border: none;
+
+  border-radius: var(--radius-md);
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast),
+    opacity var(--transition-fast);
+
+  white-space: nowrap;
+  min-width: fit-content;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================================================
+   Sizes
+   ========================================================================== */
+
+.small {
+  height: 36px;
+  padding: 0 14px;
+  font-size: 0.85rem;
+}
+
+.medium {
+  height: 44px;
+  padding: 0 18px;
+  font-size: 0.95rem;
+}
+
+.large {
+  height: 52px;
+  padding: 0 24px;
+  font-size: 1rem;
+}
+
+/* ==========================================================================
+   Variants
+   ========================================================================== */
+
+.primary {
+  background: var(--color-primary);
+  color: white;
+}
+
+.primary:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.secondary {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+
+  border: 1px solid var(--color-border);
+}
+
+.secondary:hover:not(:disabled) {
+  background: var(--color-hover);
+}
+
+.danger {
+  background: var(--color-danger);
+  color: white;
+}
+
+.danger:hover:not(:disabled) {
+  filter: brightness(0.95);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.ghost:hover:not(:disabled) {
+  background: var(--color-hover);
+}
+
+/* ==========================================================================
+   Spinner
+   ========================================================================== */
+
+.spinner {
+  width: 16px;
+  height: 16px;
+
+  border-radius: 50%;
+
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: currentColor;
+
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

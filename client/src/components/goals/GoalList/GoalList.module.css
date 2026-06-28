@@ -1,0 +1,34 @@
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+
+  gap: 24px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 320px;
+
+  text-align: center;
+
+  border: 2px dashed var(--color-border);
+
+  border-radius: 18px;
+
+  background: var(--color-surface);
+}
+
+.empty h2 {
+  margin-bottom: 8px;
+}
+
+.empty p {
+  max-width: 420px;
+
+  color: var(--color-text-secondary);
+}
