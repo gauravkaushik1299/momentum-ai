@@ -1,5 +1,15 @@
+/* ==========================================================================
+   Sidebar
+   ========================================================================== */
+
 .sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
   width: 260px;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
@@ -11,11 +21,17 @@
   transition: width 0.3s ease;
 
   overflow: hidden;
+
+  z-index: 300;
 }
 
 .collapsed {
-  width: 72px;
+  width: 76px;
 }
+
+/* ==========================================================================
+   Logo
+   ========================================================================== */
 
 .logo {
   display: flex;
@@ -28,6 +44,10 @@
   font-weight: 700;
 
   color: var(--color-text-primary);
+}
+
+.logo span {
+  white-space: nowrap;
 }
 
 .logoIcon {
@@ -47,13 +67,19 @@
   flex-shrink: 0;
 }
 
+/* ==========================================================================
+   Navigation
+   ========================================================================== */
+
 .navigation {
   display: flex;
   flex-direction: column;
 
   gap: 6px;
 
-  padding: 12px;
+  padding: 16px 12px;
+
+  flex: 1;
 }
 
 .navButton {
@@ -70,25 +96,63 @@
 
   color: var(--color-text-secondary);
 
-  transition: 0.2s;
-
   font-weight: 500;
+
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.navButton svg {
+  flex-shrink: 0;
 }
 
 .navButton:hover {
-  background: #eef2ff;
+  background: var(--color-hover);
 
   color: var(--color-primary);
 }
 
+.navButton:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Active Navigation Item
+   ========================================================================== */
+
 .active {
-  background: rgba(79, 70, 229, 0.1);
+  background: rgba(79, 70, 229, 0.12);
 
   color: var(--color-primary);
 
   font-weight: 600;
+
+  box-shadow: inset 3px 0 0 var(--color-primary);
 }
 
 .active svg {
   color: var(--color-primary);
+}
+
+.active:hover {
+  background: rgba(79, 70, 229, 0.16);
+}
+
+/* ==========================================================================
+   Mobile
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    z-index: 200;
+
+    height: 100vh;
+  }
 }

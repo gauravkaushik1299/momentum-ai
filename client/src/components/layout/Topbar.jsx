@@ -3,22 +3,26 @@ import {
     ChevronDown,
     LogOut,
     Menu,
-    Settings,
-} from 'lucide-react';
+    User,
+} from "lucide-react";
 
 import {
     useEffect,
     useRef,
     useState,
-} from 'react';
+} from "react";
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
-import { useAuth } from '../../contexts/AuthContext';
-import { useApp } from '../../contexts/AppContext';
-import useCurrentUser from '../../hooks/useCurrentUser';
+import { useAuth } from "../../contexts/AuthContext";
+import { useApp } from "../../contexts/AppContext";
+import ThemeToggle from "../common/ThemeToggle/ThemeToggle";
+import useAnalytics from "../../hooks/useAnalytics";
+import useCurrentUser from "../../hooks/useCurrentUser";
 
-import styles from './Topbar.module.css';
+import NotificationsDropdown from "./NotificationsDropdown";
+
+import styles from "./Topbar.module.css";
 
 /**
  * Application top navigation bar.
@@ -37,123 +41,256 @@ const Topbar = () => {
         initials,
     } = useCurrentUser();
 
+    const {
+        overdueTasks,
+        dueTodayTasks,
+        activeGoals,
+    } = useAnalytics();
+
+    const notificationCount =
+        overdueTasks.length +
+        dueTodayTasks.length +
+        (activeGoals > 0 ? 1 : 0);
+
     const [menuOpen, setMenuOpen] =
         useState(false);
 
+    const [imageError, setImageError] =
+        useState(false);
+
+    const [
+        notificationsOpen,
+        setNotificationsOpen,
+    ] = useState(false);
+
     const profileRef = useRef(null);
 
-    /**
-     * Close menu when clicking outside.
-     */
+    const notificationRef =
+        useRef(null);
+
+    /*
+    =====================================
+    Close dropdowns when clicking outside
+    =====================================
+    */
+
     useEffect(() => {
-        const handleClickOutside = (event) => {
+        const handleClickOutside = (
+            event
+        ) => {
             if (
                 profileRef.current &&
-                !profileRef.current.contains(event.target)
+                !profileRef.current.contains(
+                    event.target
+                )
             ) {
                 setMenuOpen(false);
+            }
+
+            if (
+                notificationRef.current &&
+                !notificationRef.current.contains(
+                    event.target
+                )
+            ) {
+                setNotificationsOpen(
+                    false
+                );
             }
         };
 
         document.addEventListener(
-            'mousedown',
+            "mousedown",
             handleClickOutside
         );
 
         return () => {
             document.removeEventListener(
-                'mousedown',
+                "mousedown",
                 handleClickOutside
             );
         };
     }, []);
 
-    /**
-     * Close menu on Escape key.
-     */
+    /*
+    =====================================
+    Close on Escape
+    =====================================
+    */
+
     useEffect(() => {
-        const handleEscape = (event) => {
-            if (event.key === 'Escape') {
+        const handleEscape = (
+            event
+        ) => {
+            if (
+                event.key === "Escape"
+            ) {
                 setMenuOpen(false);
+
+                setNotificationsOpen(
+                    false
+                );
             }
         };
 
         document.addEventListener(
-            'keydown',
+            "keydown",
             handleEscape
         );
 
         return () => {
             document.removeEventListener(
-                'keydown',
+                "keydown",
                 handleEscape
             );
         };
     }, []);
 
-    /**
-     * Logout user.
-     */
+    /*
+    =====================================
+    Settings
+    =====================================
+    */
+
+    const handleOpenSettings = () => {
+        setMenuOpen(false);
+
+        navigate("/settings");
+    };
+
+    /*
+    =====================================
+    Logout
+    =====================================
+    */
+
     const handleLogout = async () => {
         try {
             await logout();
 
             setMenuOpen(false);
 
-            navigate('/login', {
+            navigate("/login", {
                 replace: true,
             });
         } catch (error) {
             console.error(
-                'Logout failed:',
+                "Logout failed:",
                 error
             );
         }
     };
 
     return (
-        <header className={styles.topbar}>
+        <header
+            className={styles.topbar}
+        >
             <button
-                className={styles.iconButton}
-                onClick={toggleSidebar}
+                className={
+                    styles.iconButton
+                }
+                onClick={
+                    toggleSidebar
+                }
                 aria-label="Toggle Sidebar"
             >
                 <Menu size={20} />
             </button>
 
-            <div className={styles.right}>
-                <button
-                    className={styles.iconButton}
-                    aria-label="Notifications"
-                >
-                    <Bell size={20} />
-                </button>
+            <div
+                className={styles.right}
+            >
+                <ThemeToggle />
+
+
+                {/* ==========================
+                    Notifications
+                ========================== */}
 
                 <div
-                    className={styles.profile}
+                    className={
+                        styles.notification
+                    }
+                    ref={
+                        notificationRef
+                    }
+                >
+                    <button
+                        className={
+                            styles.iconButton
+                        }
+                        aria-label="Notifications"
+                        onClick={() => {
+                            setMenuOpen(
+                                false
+                            );
+
+                            setNotificationsOpen(
+                                (
+                                    previous
+                                ) =>
+                                    !previous
+                            );
+                        }}
+                    >
+                        <Bell size={20} />
+
+                        {notificationCount >
+                            0 && (
+                                <span
+                                    className={
+                                        styles.badge
+                                    }
+                                >
+                                    {notificationCount >
+                                        9
+                                        ? "9+"
+                                        : notificationCount}
+                                </span>
+                            )}
+                    </button>
+
+                    {notificationsOpen && (
+                        <NotificationsDropdown />
+                    )}
+                </div>
+
+                {/* ==========================
+                    Profile
+                ========================== */}
+
+                <div
+                    className={
+                        styles.profile
+                    }
                     ref={profileRef}
                 >
                     <button
-                        className={styles.profileButton}
-                        onClick={() =>
-                            setMenuOpen(
-                                (previous) =>
-                                    !previous
-                            )
+                        className={
+                            styles.profileButton
                         }
+                        onClick={() => {
+                            setNotificationsOpen(
+                                false
+                            );
+
+                            setMenuOpen(
+                                (
+                                    previous
+                                ) =>
+                                    !previous
+                            );
+                        }}
                     >
-                        {photoURL ? (
+                        {photoURL && !imageError ? (
                             <img
                                 src={photoURL}
                                 alt={fullName}
                                 className={styles.avatar}
+                                onError={() => setImageError(true)}
                             />
                         ) : (
-                            <div
-                                className={
-                                    styles.avatarFallback
-                                }
-                            >
+                            <div className={styles.avatarFallback}>
                                 {initials}
                             </div>
                         )}
@@ -163,14 +300,16 @@ const Topbar = () => {
                             className={
                                 menuOpen
                                     ? styles.rotate
-                                    : ''
+                                    : ""
                             }
                         />
                     </button>
 
                     {menuOpen && (
                         <div
-                            className={styles.menu}
+                            className={
+                                styles.menu
+                            }
                         >
                             <div
                                 className={
@@ -178,7 +317,9 @@ const Topbar = () => {
                                 }
                             >
                                 <strong>
-                                    {fullName}
+                                    {
+                                        fullName
+                                    }
                                 </strong>
 
                                 <span>
@@ -190,12 +331,17 @@ const Topbar = () => {
                                 className={
                                     styles.menuItem
                                 }
+                                onClick={
+                                    handleOpenSettings
+                                }
                             >
-                                <Settings
-                                    size={16}
+                                <User
+                                    size={
+                                        16
+                                    }
                                 />
 
-                                Settings
+                                Profile
                             </button>
 
                             <hr
@@ -213,7 +359,9 @@ const Topbar = () => {
                                 }
                             >
                                 <LogOut
-                                    size={16}
+                                    size={
+                                        16
+                                    }
                                 />
 
                                 Logout

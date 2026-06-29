@@ -3,32 +3,59 @@
 import {
     createContext,
     useContext,
+    useEffect,
     useMemo,
     useState,
-} from 'react';
+} from "react";
 
 const AppContext = createContext(null);
 
 export const AppProvider = ({ children }) => {
-    const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
-    const [theme, setTheme] = useState('light');
+    const [sidebarCollapsed, setSidebarCollapsed] =
+        useState(false);
+
+    const [theme, setTheme] = useState(() => {
+        return (
+            localStorage.getItem("theme") ||
+            "light"
+        );
+    });
+
+    useEffect(() => {
+        document.documentElement.setAttribute(
+            "data-theme",
+            theme
+        );
+
+        localStorage.setItem(
+            "theme",
+            theme
+        );
+    }, [theme]);
 
     const toggleSidebar = () => {
-        setIsSidebarCollapsed((prev) => !prev);
+        setSidebarCollapsed((previous) => !previous);
     };
 
     const toggleTheme = () => {
-        setTheme((prev) => (prev === 'light' ? 'dark' : 'light'));
+        setTheme((previous) =>
+            previous === "light"
+                ? "dark"
+                : "light"
+        );
     };
 
     const value = useMemo(
         () => ({
-            isSidebarCollapsed,
+            sidebarCollapsed,
+
             toggleSidebar,
+
             theme,
+
             toggleTheme,
         }),
-        [isSidebarCollapsed, theme]
+        [sidebarCollapsed, theme]
     );
 
     return (
@@ -42,7 +69,9 @@ export const useApp = () => {
     const context = useContext(AppContext);
 
     if (!context) {
-        throw new Error('useApp must be used within AppProvider.');
+        throw new Error(
+            "useApp must be used inside AppProvider."
+        );
     }
 
     return context;

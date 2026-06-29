@@ -1,9 +1,12 @@
 import { useMemo } from "react";
 
 import useTasks from "./useTasks";
+import useGoals from "./useGoals";
 
 const isToday = (dateString) => {
-  if (!dateString) return false;
+  if (!dateString) {
+    return false;
+  }
 
   const today = new Date();
   const date = new Date(dateString);
@@ -16,7 +19,9 @@ const isToday = (dateString) => {
 };
 
 const useDashboard = () => {
-  const { tasks, loading } = useTasks();
+  const { tasks, loading: tasksLoading } = useTasks();
+
+  const { goals, loading: goalsLoading } = useGoals();
 
   return useMemo(() => {
     const completedTasks = tasks.filter((task) => task.status === "Completed");
@@ -25,36 +30,46 @@ const useDashboard = () => {
 
     const tasksToday = tasks.filter((task) => isToday(task.dueDate));
 
-    const completedToday = tasksToday.filter(
-      (task) => task.status === "Completed",
-    );
-
     const productivity =
-      tasksToday.length === 0
+      tasks.length === 0
         ? 0
-        : Math.round((completedToday.length / tasksToday.length) * 100);
+        : Math.round((completedTasks.length / tasks.length) * 100);
 
     const upcomingTasks = [...activeTasks]
       .filter((task) => task.dueDate)
       .sort((a, b) => new Date(a.dueDate) - new Date(b.dueDate))
       .slice(0, 5);
 
+    const completedGoals = goals.filter((goal) => goal.status === "Completed");
+
+    const activeGoals = goals.filter((goal) => goal.status !== "Completed");
+
     return {
-      loading,
+      loading: tasksLoading || goalsLoading,
 
       tasks,
 
-      tasksToday,
+      goals,
+
+      totalTasks: tasks.length,
 
       completedTasks: completedTasks.length,
 
       activeTasks: activeTasks.length,
 
+      totalGoals: goals.length,
+
+      completedGoals: completedGoals.length,
+
+      activeGoals: activeGoals.length,
+
+      tasksToday,
+
       productivity,
 
       upcomingTasks,
     };
-  }, [tasks, loading]);
+  }, [tasks, goals, tasksLoading, goalsLoading]);
 };
 
 export default useDashboard;

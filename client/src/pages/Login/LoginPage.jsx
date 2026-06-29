@@ -56,13 +56,9 @@ const LoginPage = () => {
 
                 <Button
                     onClick={handleLogin}
-                    disabled={
-                        loading ||
-                        isSigningIn
-                    }
+                    disabled={loading || isSigningIn}
+                    leftIcon={<LogIn size={18} />}
                 >
-                    <LogIn size={18} />
-
                     {isSigningIn
                         ? 'Signing in...'
                         : 'Continue with Google'}

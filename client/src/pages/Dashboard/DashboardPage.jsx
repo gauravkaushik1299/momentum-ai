@@ -5,7 +5,7 @@ import PageHeader from '../../components/common/PageHeader';
 import DashboardStats from '../../components/dashboard/DashboardStats';
 import TodayTasks from '../../components/dashboard/TodayTasks';
 import UpcomingDeadlines from '../../components/dashboard/UpcomingDeadlines';
-
+import AIRecommendation from "../../components/ai/AIRecommendation";
 import { useAuth } from '../../contexts/AuthContext';
 
 import { getGreeting } from '../../utils/getGreeting';
@@ -22,6 +22,8 @@ const DashboardPage = () => {
                 title={`${getGreeting()}, ${firstName} 👋`}
                 subtitle="Welcome back! Here's your productivity overview."
             />
+
+            <AIRecommendation />
 
             <DashboardStats />
 

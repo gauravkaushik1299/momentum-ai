@@ -1,0 +1,35 @@
+.grid {
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+  gap: 18px;
+}
+
+.item {
+  display: flex;
+
+  gap: 16px;
+
+  align-items: center;
+
+  padding: 16px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-md);
+
+  background: var(--color-background);
+}
+
+.item strong {
+  display: block;
+
+  margin-bottom: 4px;
+}
+
+.item span {
+  color: var(--color-text-secondary);
+
+  font-size: 0.95rem;
+}

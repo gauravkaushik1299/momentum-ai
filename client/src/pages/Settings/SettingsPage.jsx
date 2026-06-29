@@ -1,15 +1,27 @@
 import AppLayout from '../../components/layout/AppLayout';
 import PageHeader from '../../components/common/PageHeader';
 
+import ProfileSection from '../../components/settings/ProfileSection';
+import ProductivitySection from '../../components/settings/ProductivitySection';
+
+
+import styles from './SettingsPage.module.css';
+
 const SettingsPage = () => {
     return (
         <AppLayout>
-            <PageHeader
-                title="Settings"
-                subtitle="Customize your workspace."
-            />
+            <div className={styles.page}>
+                <PageHeader
+                    title="Settings"
+                    subtitle="Customize your Momentum AI experience."
+                />
 
-            <h2>🚧 Coming Soon</h2>
+                <ProfileSection />
+
+                <ProductivitySection />
+
+
+            </div>
         </AppLayout>
     );
 };

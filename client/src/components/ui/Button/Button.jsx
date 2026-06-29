@@ -47,13 +47,21 @@ const Button = ({
                 <span className={styles.spinner} />
             )}
 
-            {!loading && leftIcon}
+            {!loading && leftIcon && (
+                <span className={styles.icon}>
+                    {leftIcon}
+                </span>
+            )}
 
-            <span>
+            <span className={styles.label}>
                 {children}
             </span>
 
-            {!loading && rightIcon}
+            {!loading && rightIcon && (
+                <span className={styles.icon}>
+                    {rightIcon}
+                </span>
+            )}
         </button>
     );
 };

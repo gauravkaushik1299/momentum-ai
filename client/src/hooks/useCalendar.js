@@ -13,9 +13,10 @@ const useCalendar = () => {
       .filter((task) => task.dueDate)
       .map((task) => ({
         id: `task-${task.id}`,
-        title: `📋 ${task.title}`,
+        title: task.title,
         start: new Date(task.dueDate),
         end: new Date(task.dueDate),
+        allDay: true,
         type: "task",
         resource: task,
       }));
@@ -24,9 +25,10 @@ const useCalendar = () => {
       .filter((goal) => goal.targetDate)
       .map((goal) => ({
         id: `goal-${goal.id}`,
-        title: `🎯 ${goal.title}`,
+        title: goal.title,
         start: new Date(goal.targetDate),
         end: new Date(goal.targetDate),
+        allDay: true,
         type: "goal",
         resource: goal,
       }));

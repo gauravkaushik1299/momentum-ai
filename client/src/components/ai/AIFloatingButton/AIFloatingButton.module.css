@@ -1,0 +1,45 @@
+.button {
+  position: fixed;
+
+  bottom: 10px;
+
+  right: 10px;
+
+  width: 62px;
+
+  height: 62px;
+
+  border: none;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  opacity: 0.8;
+
+  cursor: pointer;
+
+  box-shadow: var(--shadow-lg);
+
+  z-index: 500;
+
+  transition:
+    transform var(--transition-fast),
+    background var(--transition-fast);
+}
+
+.button:hover {
+  transform: scale(1.06);
+}
+
+.button:active {
+  transform: scale(0.96);
+}

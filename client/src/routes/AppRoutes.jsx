@@ -11,7 +11,8 @@ import LoginPage from '../pages/Login/LoginPage';
 import TasksPage from '../pages/Tasks/TasksPage';
 import CalendarPage from '../pages/Calendar';
 import ProtectedRoute from './ProtectedRoute';
-
+import SettingsPage from '../pages/Settings';
+import AnalyticsPage from '../pages/Analytics';
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -58,6 +59,26 @@ const AppRoutes = () => {
                     element={
                         <ProtectedRoute>
                             <CalendarPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/* Analytics */}
+                <Route
+                    path="/analytics"
+                    element={
+                        <ProtectedRoute>
+                            <AnalyticsPage />
+                        </ProtectedRoute>
+                    }
+                />
+
+                {/* Setting */}
+                <Route
+                    path="/profile"
+                    element={
+                        <ProtectedRoute>
+                            <SettingsPage />
                         </ProtectedRoute>
                     }
                 />

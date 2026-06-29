@@ -3,7 +3,7 @@ import {
     ChartColumn,
     CheckSquare,
     LayoutDashboard,
-    Settings,
+    User,
     Target,
 } from 'lucide-react';
 
@@ -14,7 +14,7 @@ import { useApp } from '../../contexts/AppContext';
 import styles from './Sidebar.module.css';
 
 const Sidebar = () => {
-    const { isSidebarCollapsed } = useApp();
+    const { sidebarCollapsed } = useApp();
 
     const menuItems = [
         {
@@ -43,15 +43,15 @@ const Sidebar = () => {
             path: '/analytics',
         },
         {
-            title: 'Settings',
-            icon: Settings,
-            path: '/settings',
+            title: 'Profile',
+            icon: User,
+            path: '/profile',
         },
     ];
 
     return (
         <aside
-            className={`${styles.sidebar} ${isSidebarCollapsed
+            className={`${styles.sidebar} ${sidebarCollapsed
                 ? styles.collapsed
                 : ''
                 }`}
@@ -61,7 +61,7 @@ const Sidebar = () => {
                     M
                 </div>
 
-                {!isSidebarCollapsed && (
+                {!sidebarCollapsed && (
                     <span>Momentum AI</span>
                 )}
             </div>
@@ -83,8 +83,10 @@ const Sidebar = () => {
                         >
                             <Icon size={20} />
 
-                            {!isSidebarCollapsed && (
-                                <span>{item.title}</span>
+                            {!sidebarCollapsed && (
+                                <span>
+                                    {item.title}
+                                </span>
                             )}
                         </NavLink>
                     );

@@ -12,43 +12,40 @@ import './index.css';
 
 import App from './App.jsx';
 
-import { AppProvider } from './contexts/AppContext';
-import { AuthProvider } from './contexts/AuthContext';
+import Providers from './providers/Providers';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AppProvider>
-      <AuthProvider>
-        <App />
+    <Providers>
+      <App />
 
-        <Toaster
-          position="top-right"
-          gutter={12}
-          toastOptions={{
-            duration: 3000,
+      <Toaster
+        position="top-right"
+        gutter={12}
+        toastOptions={{
+          duration: 3000,
 
-            style: {
-              borderRadius: '14px',
-              padding: '16px',
-              fontSize: '14px',
+          style: {
+            borderRadius: '14px',
+            padding: '16px',
+            fontSize: '14px',
+          },
+
+          success: {
+            iconTheme: {
+              primary: '#16a34a',
+              secondary: '#ffffff',
             },
+          },
 
-            success: {
-              iconTheme: {
-                primary: '#16a34a',
-                secondary: '#ffffff',
-              },
+          error: {
+            iconTheme: {
+              primary: '#dc2626',
+              secondary: '#ffffff',
             },
-
-            error: {
-              iconTheme: {
-                primary: '#dc2626',
-                secondary: '#ffffff',
-              },
-            },
-          }}
-        />
-      </AuthProvider>
-    </AppProvider>
+          },
+        }}
+      />
+    </Providers>
   </StrictMode>
 );

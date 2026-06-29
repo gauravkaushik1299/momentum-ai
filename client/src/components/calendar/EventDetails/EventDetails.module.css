@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+.container h2 {
+  margin: 0;
+}
+
+.container p {
+  color: var(--color-text-secondary);
+
+  line-height: 1.7;
+}
+
+.info {
+  display: flex;
+
+  justify-content: space-between;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid var(--color-border);
+}

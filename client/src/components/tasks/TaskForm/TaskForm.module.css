@@ -31,13 +31,17 @@
 
   border-radius: 12px;
 
-  background: white;
+  background: var(--color-surface);
 
   color: var(--color-text-primary);
 
   font-size: 15px;
 
-  transition: 0.2s;
+  transition:
+    background-color var(--transition-theme),
+    color var(--transition-theme),
+    border-color var(--transition-theme),
+    box-shadow 0.2s ease;
 
   box-sizing: border-box;
 }
@@ -92,4 +96,18 @@
   .actions button {
     width: 100%;
   }
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.field select option {
+  background: var(--color-surface);
+  color: var(--color-text-primary);
+}
+
+[data-theme="dark"] .field input[type="date"] {
+  color-scheme: dark;
 }

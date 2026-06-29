@@ -1,0 +1,77 @@
+.toggle {
+  position: relative;
+
+  width: 76px;
+  height: 38px;
+
+  border: 1px solid var(--color-border);
+
+  border-radius: 999px;
+
+  background: var(--color-surface);
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  padding: 0 10px;
+
+  cursor: pointer;
+
+  overflow: hidden;
+
+  transition:
+    background-color var(--transition-theme),
+    border-color var(--transition-theme),
+    box-shadow 0.3s ease;
+}
+
+.toggle:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle svg {
+  z-index: 2;
+
+  transition:
+    color 0.35s ease,
+    transform 0.25s ease;
+}
+
+.toggle:hover svg {
+  transform: scale(1.1);
+}
+
+.knob {
+  position: absolute;
+
+  left: 4px;
+
+  width: 30px;
+  height: 30px;
+
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  transition:
+    transform 0.35s ease,
+    background-color var(--transition-theme),
+    scale 0.2s ease;
+
+  z-index: 1;
+}
+
+.dark {
+  transform: translateX(38px);
+}
+
+.toggle:active .knob {
+  scale: 0.92;
+}
+
+.active {
+  color: white;
+}
